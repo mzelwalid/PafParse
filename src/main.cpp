@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
 
     string fileName = argv[1];
     cout << fileName << std::endl;
-    //PafParser *test;
+
     PafParser test(fileName);
     cout << test.getFileName() << '\n';
     cout << test.getNumOfAlignments() << '\n';
@@ -31,8 +31,6 @@ int main(int argc, const char * argv[]) {
     
     
     std::unordered_set<string> uset;
-    std::unordered_map<string, int> umap;
-
     std::vector<string> uniqueKeys;
 
     for(int i = 0; i < test.getNumOfAlignments(); i++)
@@ -48,10 +46,6 @@ int main(int argc, const char * argv[]) {
 
     for(string i : uniqueKeys)
         cout << i << std::endl;
-
-    
-
-    
 
     return 0;
 }
