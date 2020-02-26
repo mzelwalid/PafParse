@@ -11,6 +11,7 @@
 #include <iomanip>
 using std::cout;
 using std::string;
+
 PafParser::PafParser(string name){
     fileName = name;
     numOfAlignments = PafParser::lineCount(fileName);
@@ -19,11 +20,14 @@ PafParser::PafParser(string name){
     alignmentList.reserve(sizeof(Alignment) * numOfAlignments);
     populateAlignList();
 }
+
 PafParser::~PafParser(){    
 }
+
 string PafParser::getFileName(){
     return fileName;
 }
+
 //counts the number of new line chars in a file and return the value.
 //for a *.paf file this should be the number of alignments in the file.
 int PafParser::lineCount(string name)
@@ -37,12 +41,14 @@ int PafParser::lineCount(string name)
     input.close();
     return i;
 }
+
 int PafParser::getNumOfAlignments(){
     return numOfAlignments;
 }
+
 void PafParser::populateAlignList(){
     std::ifstream input(fileName);
-    string queryName, targetName;
+    string queryName, targetName, remainder;
     char strand;
     int queryLength, queryStart, queryStop, targetLength, targetStart,
         targetEnd, numOfMatch, numOfBases, mapQual;
@@ -55,14 +61,17 @@ void PafParser::populateAlignList(){
            strand >> targetName >> targetLength >> targetStart >> targetEnd
            >> numOfMatch >> numOfBases >> mapQual)
         {
+            if(!getline(ss >> std::ws, remainder))
+                remainder = "Empty";
             alignmentList.emplace_back(queryName, queryLength, queryStart,
                                        queryStop, strand, targetName,
                                        targetLength, targetStart, targetEnd,
-                                       numOfMatch, numOfBases, mapQual);
+                                       numOfMatch, numOfBases, mapQual, remainder);
         };
     }
     return;
 }
+
 bool PafParser::sortByTarget(const Alignment a, const Alignment b){
     return a.queryStart < b.queryStart;
 };

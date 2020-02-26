@@ -32,15 +32,17 @@ public:
         
         int numOfMatch, numOfBases, mapQual;
 
+        string remainder;
+
         //construct Alignment requiring first 12 paf outputs
         //constructor for alignment init
         Alignment(string queryName, int queryLength, int queryStart, int queryStop, 
                 char strand, string targetName, int targetLength, int targetStart, int targetEnd, 
-                int numOfMatch, int numOfBases, int mapQual):
+                int numOfMatch, int numOfBases, int mapQual, string remainder):
                 queryName(queryName), queryLength(queryLength), queryStart(queryStart), 
                 queryStop(queryStop), strand(strand), targetName(targetName), 
                 targetLength(targetLength), targetStart(targetStart), targetEnd(targetEnd), 
-                numOfMatch(numOfMatch), numOfBases(numOfBases), mapQual(mapQual)
+                numOfMatch(numOfMatch), numOfBases(numOfBases), mapQual(mapQual), remainder(remainder)
         {
         }
     } typedef Alignment;

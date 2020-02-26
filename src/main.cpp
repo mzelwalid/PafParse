@@ -35,17 +35,17 @@ int main(int argc, const char * argv[]) {
 
     for(int i = 0; i < test.getNumOfAlignments(); i++)
     {
-        cout << test.alignmentList[i].targetName << " " << test.alignmentList[i].targetLength << std::endl;;
+        cout << test.alignmentList[i].remainder << " " << test.alignmentList[i].targetLength << std::endl;
         uset.insert(test.alignmentList[i].targetName);
     }
 
-    std::unordered_set<string> :: iterator itr; 
+    std::unordered_set<string>::iterator itr; 
     for (itr = uset.begin(); itr != uset.end(); itr++){ 
         uniqueKeys.emplace_back((string)(*itr));
     }
 
     for(string i : uniqueKeys)
-        cout << i << std::endl;
+        cout << i << '\n';
 
     return 0;
 }
